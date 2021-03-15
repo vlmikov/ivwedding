@@ -3,7 +3,9 @@ from . import views
 
 urlpatterns = [
    
-    path('<int:pk>/', views.home, name="home"),
+    path('guest/<slug:slug>/', views.home, name="home"),
+    path('dashboard/', views.dashboard, name='dashboard')
+    #path('test/', views.invitation, name = "invitation")
     
     
 ]
