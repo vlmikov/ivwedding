@@ -74,7 +74,7 @@
 -->
 
 <style>
-
+body{background-color: rgb(196, 196, 196);}
     
 </style>
 
@@ -87,7 +87,7 @@
     <body id="body">
 		
 		
-			<audio src="{% static 'wedd_app/music/background.mp3' %}" id="my_audio" loop="loop"></audio>
+			<!-- <audio src="{% static 'wedd_app/music/background.mp3' %}" id="my_audio" loop="loop"></audio>
 			<script type="text/javascript">
 				setTimeout(function(){
 					//This area will be used to write code
@@ -97,7 +97,7 @@
 
 				}, 3000)
 
-			</script>
+			</script> -->
 
 
 
@@ -140,12 +140,11 @@
 				<!-- main nav -->
                 <nav class="collapse navbar-collapse navbar-right" role="navigation">
                     <ul id="nav" class="nav navbar-nav">
-                        <li class="current"><a href="#body">Home</a></li>
-                        <li><a href="#features">За нас</a></li>
+                        <li class="current"><a href="/dashboard">Home</a></li>
+                        <li><a href="/admin" target="blank">ADMIN</a></li>
                         <li><a href="#works">Галерия</a></li>
-                        <li><a href="#team"></a></li>
-						<li><a href="#contact">Contact</a></li>
-						<li><a href="/logout">Logout</a></li>
+                        <li><a href="#team"></a></li>	
+						
 						
                     </ul>
                 </nav>
@@ -166,61 +165,61 @@
 
 
 
+
+
+
 		
         <div class="container" style="margin-top: 100px;">
 
-            <nav class="nav">
-                <a class="nav-link active" href="#">Active</a>
-                <a class="nav-link" href="#">Link1</a>
-                <a class="nav-link" href="#">Link2</a>
-                <a class="nav-link disabled" href="#">Disabled</a>
-              </nav>
+           
 
-            <hr>
+            	<hr>
+				<h1 style="text-align: center;">ПОКАНИ</h1>
+				<hr>
 
             <div class="container" >
-                <div class="row">
-                  <div class="col col-lg-6" style="background-color:rgb(253, 208, 253);">
+                <div class="row" >
+                  <div class="col col-lg-5" style="background-color:rgb(248, 211, 248);border-radius: 24px;">
 
-                    <div class="row d-flex justify-content-center mt-10" >
-                        <div class="col-md-6">
-                            <div class="progress blue"  style="background-color:rgb(253, 208, 253); ;" > <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
-                                <div class="progress-value">50%</div>
-                            </div>
-                         
-                        </div>
-                    </div>
+                    
 
 
                      <!-- SERVER STATUS PANELS -->
-              
-                  <div class="grey-header">
-                    <h5>SERVER LOAD</h5>
+                    <h3 style="text-align: center; margin-top: 10px;">Покани Вики</h3>
+                  <div class="grey-header" style="text-align: center; margin-top: 10px;">
+                    <h5>Процент потвърдили присъствие</h5>
                   </div>
-                  <canvas id="serverstatus01" height="120" width="120"></canvas>
+                  <canvas id="serverstatus01" height="120" width="120" style="margin-left: 40%; margin-right: 60%;"></canvas>
                   <script>
+
+					var value_compl = {{viki_complete_percentage}};
+					var value_uncomp = {{viki_uncomplete}};  
+					console.log(value_compl)
                     var doughnutData = [{
-                        value: 50,
+                        value: value_compl,
                         color: "#FF6B6B"
                       },
                       {
-                        value: 50,
+                        value: value_uncomp,
                         color: "#fdfdfd"
                       }
                     ];
                     var myDoughnut = new Chart(document.getElementById("serverstatus01").getContext("2d")).Doughnut(doughnutData);
                   </script>
                   <div class="row">
-                    <div class="col-sm-6 col-xs-6 goleft">
-                      <p>Usage<br/>Increase:</p>
+                    <div class="col-sm-5 col-xs-5 goleft">
+                      <p>Очакващи потвърждение: </p>
+                      <p>Завършени: </p>
+                      <hr>
+                      <p><strong>Общо покани:</strong></p>
                     </div>
-                    <div class="col-sm-6 col-xs-6">
-                      <h2>21%</h2>
+                    <div class="col-sm-6 col-xs-6" style=" text-align: left;">
+                      <h2>{{ viki_complete_percentage }} %</h2>
                     </div>
                   </div>
 
 
-                        <h3 style="text-align: center;">Покани Вики</h3>
+                        
                     <div class="row">
                         <div class="col-12">
                           <table class="table table-bordered">
@@ -229,6 +228,7 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Име на поканата</th>
                                 <th scope="col">url</th>
+								<th scope="col">id_гости</th>
                                 
                               </tr>
                             </thead>
@@ -236,19 +236,186 @@
           
                               {% for invitation in invitations %}
                                   {% if 'Вики' in invitation.cat_type_guests %}
-                                      <tr >
-                                        <th scope="row">{{ invitation.pk }}</th>
-                                        <td>{{ invitation.slug_name }}</td>
-                                        <td><a href="{{ invitation.url }}">{{ invitation.url }}</a></td>
-                                        <td>
-                                          <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                                          <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                                        </td>
+								  {% if invitation.complete == True %}
+								  <tr style="background-color: rgb(203, 240, 148);">
+									<th scope="row">{{ invitation.pk }}</th>
+									<td>{{ invitation.slug_name }}</td>
+									<td><a href="{{ invitation.url }}">{{ invitation.url }}</a></td>
+									
+
+									<td>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter{{ invitation.pk }}">
+											View
+										  </button>
+										  
+										  <!-- Modal -->
+										  <div class="modal fade" id="exampleModalCenter{{ invitation.pk }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+											  <div class="modal-content">
+												<div class="modal-header">
+												  <h5 class="modal-title" id="exampleModalLongTitle">Покана ID {{ invitation.pk }}</h5>
+												  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												  </button>
+												</div>
+												<div class="modal-body">
+													<h4>Име на поканата : {{ invitation.slug_name }}</h4>
+													<h4>Категория на поканата: {{ invitation.cat_type_guests }}</h4>
+													<h4>Url : <a href="{{ invitation.url }}">{{ invitation.url }}</a></h4>
+													<h4>Статус на поканата: 
+														{% if invitation.complete %}
+														Изпълнена
+														{% else %}
+														Неизпълнена
+														{% endif %}
+													</h4>
+													<h4>Email: {{ invitation.guest_1.email }}</h4>
+													
+													<hr>
+													{% if invitation.guest_1.accept_invitation %}
+													<h4 style="color: greenyellow;">Гост 1 / id: {{ invitation.guest_1.pk }}</h4>
+													{% else  %}
+													<h4 style="color: red;" >Гост 1 / id: {{ invitation.guest_1.pk }}</h4>
+													{% endif %}
+													
+													<h5>Име : {{ invitation.guest_1.first_name }}</h5>
+													<h5>Фамилия : {{ invitation.guest_1.last_name }}</h5>
+													<h5>Меню :
+														{% if invitation.guest_1.is_vegetarian %}
+														Вегетарианско
+														{% elif invitation.guest_1.is_vegetarian == false %}
+														С месо
+														{% else %}
+														{% endif %}
+														</h5>
+													<h5>Маса :  {{ invitation.guest_1.table_num }}</h5>
+
+													<hr>
+													{% if invitation.guest_2.accept_invitation %}
+													<h4 style="color: greenyellow;">Гост 2 / id: {{ invitation.guest_2.pk }}</h4>
+													{% else  %}
+													<h4 style="color: red;" >Гост 2 / id: {{ invitation.guest_2.pk }}</h4>
+													{% endif %}
+													
+													<h5>Име : {{ invitation.guest_2.first_name }}</h5>
+													<h5>Фамилия : {{ invitation.guest_2.last_name }}</h5>
+													<h5>Меню :
+														{% if invitation.guest_1.is_vegetarian %}
+														Вегетарианско
+														{% elif invitation.guest_1.is_vegetarian == false %}
+														С месо
+														{% else %}
+														{% endif %}
+														</h5>
+													<h5>Маса :  {{ invitation.guest_2.table_num }}</h5>
+
+												</div>
+												<div class="modal-footer">
+												  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+												  <button type="button" class="btn btn-primary">Save changes</button>
+												</div>
+											  </div>
+											</div>
+										  </div>
+										</td>
+
+
+
+
+								</tr>
+								{% else %}
+								<tr style="background-color: rgb(240, 161, 161);">
+									<th scope="row">{{ invitation.pk }}</th>
+									<td>{{ invitation.slug_name }}</td>
+									<td><a href="{{ invitation.url }}">{{ invitation.url }}</a></td>
+									
+
+
+									<td>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter{{ invitation.pk }}">
+											View
+										  </button>
+										  
+										  <!-- Modal -->
+										  <div class="modal fade" id="exampleModalCenter{{ invitation.pk }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+											  <div class="modal-content">
+												<div class="modal-header">
+												  <h5 class="modal-title" id="exampleModalLongTitle">Покана ID {{ invitation.pk }}</h5>
+												  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												  </button>
+												</div>
+												<div class="modal-body">
+													<h4>Име на поканата : {{ invitation.slug_name }}</h4>
+													<h4>Категория на поканата: {{ invitation.cat_type_guests }}</h4>
+													<h4>Url : <a href="{{ invitation.url }}">{{ invitation.url }}</a></h4>
+													<h4>Статус на поканата: 
+														{% if invitation.complete %}
+														Изпълнена
+														{% else %}
+														Неизпълнена
+														{% endif %}
+													</h4>
+													<h4>Email: {{ invitation.guest_1.email }}</h4>
+													
+													<hr>
+													{% if invitation.guest_1.accept_invitation %}
+													<h4 style="color: greenyellow;">Гост 1 / id: {{ invitation.guest_1.pk }}</h4>
+													{% else  %}
+													<h4 style="color: red;" >Гост 1 / id: {{ invitation.guest_1.pk }}</h4>
+													{% endif %}
+													
+													<h5>Име : {{ invitation.guest_1.first_name }}</h5>
+													<h5>Фамилия : {{ invitation.guest_1.last_name }}</h5>
+													<h5>Меню :
+														{% if invitation.guest_1.is_vegetarian %}
+														Вегетарианско
+														{% elif invitation.guest_1.is_vegetarian == false %}
+														С месо
+														{% else %}
+														{% endif %}
+														</h5>
+													<h5>Маса :  {{ invitation.guest_1.table_num }}</h5>
+
+													<hr>
+													{% if invitation.guest_2.accept_invitation %}
+													<h4 style="color: greenyellow;">Гост 2 / id: {{ invitation.guest_2.pk }}</h4>
+													{% else  %}
+													<h4 style="color: red;" >Гост 2 / id: {{ invitation.guest_2.pk }}</h4>
+													{% endif %}
+													
+													<h5>Име : {{ invitation.guest_2.first_name }}</h5>
+													<h5>Фамилия : {{ invitation.guest_2.last_name }}</h5>
+													<h5>Меню :
+														{% if invitation.guest_1.is_vegetarian %}
+														Вегетарианско
+														{% elif invitation.guest_1.is_vegetarian == false %}
+														С месо
+														{% else %}
+														{% endif %}
+														</h5>
+													<h5>Маса :  {{ invitation.guest_2.table_num }}</h5>
+
+												</div>
+												<div class="modal-footer">
+												  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+												  <button type="button" class="btn btn-primary">Save changes</button>
+												</div>
+											  </div>
+											</div>
+										  </div>
+										</td>
+
+
+
+								</tr>
+								{% endif %}
+										
                                  {% endif %}
                                   
                               
-                              </tr>
+                             
                               {% endfor %}
                           
                             </tbody>
@@ -258,8 +425,46 @@
 
 
                   </div>
-                  <div class="col col-lg-6" style="background-color:rgb(214, 223, 252);">
+
+
+				  
+
+                  <div class="col col-lg-5 col-lg-offset-2" style="background-color:rgb(214, 223, 252); border-radius: 24px;">
                         <h3 style="text-align: center;">Покани Илиан</h3>
+						<div class="grey-header" style="text-align: center; margin-top: 10px;">
+							<h5>Процент потвърдили присъствие</h5>
+						  </div>
+						  <canvas id="serverstatus02" height="120" width="120" style="margin-left: 40%; margin-right: 60%;"></canvas>
+						  <script>
+
+							var value_compl = {{ilian_complete_percentage}};
+							var value_uncomp = {{ilian_uncomplete}};  
+							console.log(value_compl)
+							var doughnutData = [{
+								value: value_compl,
+								color: "#FF6B6B"
+							  },
+							  {
+								value: value_uncomp,
+								color: "#fdfdfd"
+							  }
+							];
+							var myDoughnut = new Chart(document.getElementById("serverstatus02").getContext("2d")).Doughnut(doughnutData);
+						  </script>
+						  <div class="row">
+							<div class="col-sm-5 col-xs-5 goleft">
+							  <p>Очакващи потвърждение: </p>
+							  <p>Завършени: </p>
+							  <hr>
+							  <p><strong>Общо покани:</strong></p>
+							</div>
+							<div class="col-sm-5 col-xs-5" style=" text-align: left;">
+							  <h2>{{ ilian_complete_percentage }} %</h2>
+							</div>
+						  </div>
+
+					
+
                     <div class="row">
                         <div class="col-12">
                           <table class="table table-bordered">
@@ -275,19 +480,182 @@
           
                               {% for invitation in invitations %}
                                   {% if 'Илиан' in invitation.cat_type_guests %}
-                                      <tr>
+								  	{% if invitation.complete == True %}
+                                      <tr style="background-color: rgb(203, 240, 148);">
                                         <th scope="row">{{ invitation.pk }}</th>
                                         <td>{{ invitation.slug_name }}</td>
-                                        <td>{{ invitation.url }}</td>
-                                        <td>
-                                          <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                                          <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                                        </td>
+                                        <td><a href="{{ invitation.url }}">{{ invitation.url }}</a></td>
+
+										
+									<td>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter{{ invitation.pk }}">
+											View
+										  </button>
+										  
+										  <!-- Modal -->
+										  <div class="modal fade" id="exampleModalCenter{{ invitation.pk }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+											  <div class="modal-content">
+												<div class="modal-header">
+												  <h5 class="modal-title" id="exampleModalLongTitle">Покана ID {{ invitation.pk }}</h5>
+												  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												  </button>
+												</div>
+												<div class="modal-body">
+													<h4>Име на поканата : {{ invitation.slug_name }}</h4>
+													<h4>Категория на поканата: {{ invitation.cat_type_guests }}</h4>
+													<h4>Url : <a href="{{ invitation.url }}">{{ invitation.url }}</a></h4>
+													<h4>Статус на поканата: 
+														{% if invitation.complete %}
+														Изпълнена
+														{% else %}
+														Неизпълнена
+														{% endif %}
+													</h4>
+													<h4>Email: {{ invitation.guest_1.email }}</h4>
+													
+													<hr>
+													{% if invitation.guest_1.accept_invitation %}
+													<h4 style="color: greenyellow;">Гост 1 / id: {{ invitation.guest_1.pk }}</h4>
+													{% else  %}
+													<h4 style="color: red;" >Гост 1 / id: {{ invitation.guest_1.pk }}</h4>
+													{% endif %}
+													
+													<h5>Име : {{ invitation.guest_1.first_name }}</h5>
+													<h5>Фамилия : {{ invitation.guest_1.last_name }}</h5>
+													<h5>Меню :
+														{% if invitation.guest_1.is_vegetarian %}
+														Вегетарианско
+														{% elif invitation.guest_1.is_vegetarian == false %}
+														С месо
+														{% else %}
+														{% endif %}
+														</h5>
+													<h5>Маса :  {{ invitation.guest_1.table_num }}</h5>
+
+													<hr>
+													{% if invitation.guest_2.accept_invitation %}
+													<h4 style="color: greenyellow;">Гост 2 / id: {{ invitation.guest_2.pk }}</h4>
+													{% else  %}
+													<h4 style="color: red;" >Гост 2 / id: {{ invitation.guest_2.pk }}</h4>
+													{% endif %}
+													
+													<h5>Име : {{ invitation.guest_2.first_name }}</h5>
+													<h5>Фамилия : {{ invitation.guest_2.last_name }}</h5>
+													<h5>Меню :
+														{% if invitation.guest_1.is_vegetarian %}
+														Вегетарианско
+														{% elif invitation.guest_1.is_vegetarian == false %}
+														С месо
+														{% else %}
+														{% endif %}
+														</h5>
+													<h5>Маса :  {{ invitation.guest_2.table_num }}</h5>
+
+												</div>
+												<div class="modal-footer">
+												  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+												  <button type="button" class="btn btn-primary">Save changes</button>
+												</div>
+											  </div>
+											</div>
+										  </div>
+										</td>
+
+
+									</tr>
+									{% else %}
+									<tr style="background-color: rgb(240, 161, 161);">
+                                        <th scope="row">{{ invitation.pk }}</th>
+                                        <td>{{ invitation.slug_name }}</td>
+                                        <td><a href="{{ invitation.url }}">{{ invitation.url }}</a></td>
+
+										
+									<td>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter{{ invitation.pk }}">
+											View
+										  </button>
+										  
+										  <!-- Modal -->
+										  <div class="modal fade" id="exampleModalCenter{{ invitation.pk }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+											  <div class="modal-content">
+												<div class="modal-header">
+												  <h5 class="modal-title" id="exampleModalLongTitle">Покана ID {{ invitation.pk }}</h5>
+												  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												  </button>
+												</div>
+												<div class="modal-body">
+													<h4>Име на поканата : {{ invitation.slug_name }}</h4>
+													<h4>Категория на поканата: {{ invitation.cat_type_guests }}</h4>
+													<h4>Url : <a href="{{ invitation.url }}">{{ invitation.url }}</a></h4>
+													<h4>Статус на поканата: 
+														{% if invitation.complete %}
+														Изпълнена
+														{% else %}
+														Неизпълнена
+														{% endif %}
+													</h4>
+													<h4>Email: {{ invitation.guest_1.email }}</h4>
+													
+													<hr>
+													{% if invitation.guest_1.accept_invitation %}
+													<h4 style="color: greenyellow;">Гост 1 / id: {{ invitation.guest_1.pk }}</h4>
+													{% else  %}
+													<h4 style="color: red;" >Гост 1 / id: {{ invitation.guest_1.pk }}</h4>
+													{% endif %}
+													
+													<h5>Име : {{ invitation.guest_1.first_name }}</h5>
+													<h5>Фамилия : {{ invitation.guest_1.last_name }}</h5>
+													<h5>Меню :
+														{% if invitation.guest_1.is_vegetarian %}
+														Вегетарианско
+														{% elif invitation.guest_1.is_vegetarian == false %}
+														С месо
+														{% else %}
+														{% endif %}
+														</h5>
+													<h5>Маса :  {{ invitation.guest_1.table_num }}</h5>
+
+													<hr>
+													{% if invitation.guest_2.accept_invitation %}
+													<h4 style="color: greenyellow;">Гост 2 / id: {{ invitation.guest_2.pk }}</h4>
+													{% else  %}
+													<h4 style="color: red;" >Гост 2 / id: {{ invitation.guest_2.pk }}</h4>
+													{% endif %}
+													
+													<h5>Име : {{ invitation.guest_2.first_name }}</h5>
+													<h5>Фамилия : {{ invitation.guest_2.last_name }}</h5>
+													<h5>Меню :
+														{% if invitation.guest_1.is_vegetarian %}
+														Вегетарианско
+														{% elif invitation.guest_1.is_vegetarian == false %}
+														С месо
+														{% else %}
+														{% endif %}
+														</h5>
+													<h5>Маса :  {{ invitation.guest_2.table_num }}</h5>
+
+												</div>
+												<div class="modal-footer">
+												  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+												  <button type="button" class="btn btn-primary">Save changes</button>
+												</div>
+											  </div>
+											</div>
+										  </div>
+										</td>
+
+
+									</tr>
+									{% endif %}
+                                       
                                  {% endif %}
                                   
                               
-                              </tr>
+                              
                               {% endfor %}
                           
                             </tbody>
@@ -297,12 +665,219 @@
 
                   </div>
                 </div>
+
+
+
+
+
+				<!--GUESTS-->
+				<hr>
+				<h1 style="text-align: center;">ГОСТИ</h1>
+				<hr>
+				<div class="row" >
+					<div class="col col-lg-5" style="background-color:rgb(248, 211, 248);border-radius: 24px;">
+  
+					  
+  
+  
+					   <!-- SERVER STATUS PANELS -->
+					   <h3 style="text-align: center;"> Гости Вики</h3>
+					   <div class="grey-header" style="text-align: center; margin-top: 10px;">
+						   <h5>Процент потвърдили присъствие</h5>
+						 </div>
+						 <canvas id="viki_guests" height="120" width="120" style="margin-left: 40%; margin-right: 60%;"></canvas>
+						 <script>
+						 var value_compl_viki = {{guests_percentage_accept_viki}};
+						 var value_uncomp_viki = {{guests_percentage_not_viki}};  
+
+						   var doughnutData = [{
+							   value: value_compl_viki,
+							   color: "#FF6B6B"
+							 },
+							 {
+							   value: value_uncomp_viki,
+							   color: "#fdfdfd"
+							 }
+						   ];
+						   var myDoughnut = new Chart(document.getElementById("viki_guests").getContext("2d")).Doughnut(doughnutData);
+						 </script>
+						 <div class="row">
+						   <div class="col-sm-5 col-xs-5 goleft">
+							 <p style="color: rgb(248, 248, 138);">Очакващи: <span style="color: black;"> {{ guests_viki_pending }} </span>  </p>
+							 <p style="color: rgb(203, 240, 148);">Потвърдени:  <span style="color: black;"> {{ guests_viki_accept }} </span> </p>
+							 <p style="color: rgb(240, 161, 161);">Отказали:  <span style="color: black;"> {{ guests_viki_not_accept }} </span> </p>
+							 <hr>
+							 <p><strong>Общо покани:</strong></p>
+						   </div>
+						   <div class="col-sm-5 col-xs-5" style=" text-align: left;">
+							 <h2>{{ guests_percentage_accept_viki }} %</h2>
+						   </div>
+						 </div>
+
+				   
+
+				   <div class="row">
+					   <div class="col-12">
+						 <table class="table table-bordered">
+						   <thead>
+							 <tr>
+							   <th scope="col">От покана</th>
+							   <th scope="col">Име на госта</th>
+							   <th scope="col">Фамилия</th>
+							   <th scope="col">Вегетарианец</th>
+							   
+							   
+							 </tr>
+						   </thead>
+						   <tbody>
+		 
+							 {% for guest in viki_guests %}
+								 {% if guest.accept_invitation == 'Приемам' %}
+									 <tr style="background-color:rgb(203, 240, 148);">
+									   <th scope="row">{{ guest.pk }}</th>
+									   <td>{{ guest.first_name }}</td>
+									   <td>{{ guest.last_name }}</td>
+									   <td>{{ guest.is_vegetarian }}</td>
+									 </tr>
+								 {% elif guest.accept_invitation == 'Отказвам' %}
+								 <tr style="background-color:rgb(240, 161, 161);">
+									 <th scope="row">{{ guest.pk }}</th>
+									 <td>{{ guest.first_name }}</td>
+									 <td>{{ guest.last_name }}</td>
+									 <td>{{ guest.is_vegetarian }}</td>
+								   </tr>
+								 {% else %}
+								 <tr style="background-color:rgb(248, 248, 138);">
+									 <th scope="row">{{ guest.pk }}</th>
+									 <td>{{ guest.first_name }}</td>
+									 <td>{{ guest.last_name }}</td>
+									 <td>{{ guest.is_vegetarian }}</td>
+								   </tr>
+								 {% endif %}
+								
+								 
+							 
+							 
+							 {% endfor %}
+						 
+						   </tbody>
+						 </table>
+					   </div>
+					 </div>
+
+  
+  
+					</div>
+  
+  
+					
+  
+					<div class="col col-lg-5 col-lg-offset-2" style="background-color:rgb(214, 223, 252); border-radius: 24px;">
+						  <h3 style="text-align: center;"> Гости Илиан</h3>
+						  <div class="grey-header" style="text-align: center; margin-top: 10px;">
+							  <h5>Процент потвърдили присъствие</h5>
+							</div>
+							<canvas id="ilian_guests" height="120" width="120" style="margin-left: 40%; margin-right: 60%;"></canvas>
+							<script>
+							var value_compl_ilian = {{guests_percentage_accept_ilian}};
+							var value_uncomp_ilian = {{guests_percentage_not_ilian}};  
+
+							  var doughnutData = [{
+								  value: value_compl_ilian,
+								  color: "#FF6B6B"
+								},
+								{
+								  value: value_uncomp_ilian,
+								  color: "#fdfdfd"
+								}
+							  ];
+							  var myDoughnut = new Chart(document.getElementById("ilian_guests").getContext("2d")).Doughnut(doughnutData);
+							</script>
+							<div class="row">
+							  <div class="col-sm-5 col-xs-5 goleft">
+								<p style="color: rgb(248, 248, 138);">Очакващи: <span style="color: black;"> {{ guests_ilian_pending }} </span>  </p>
+								<p style="color: rgb(203, 240, 148);">Потвърдени:  <span style="color: black;"> {{ guests_ilian_accept }} </span> </p>
+								<p style="color: rgb(240, 161, 161);">Отказали:  <span style="color: black;"> {{ guests_ilian_not_accept }} </span> </p>
+								<hr>
+								<p><strong>Общо покани:</strong></p>
+							  </div>
+							  <div class="col-sm-5 col-xs-5" style=" text-align: left;">
+								<h2>{{ guests_percentage_accept_ilian }} %</h2>
+							  </div>
+							</div>
+  
+					  
+  
+					  <div class="row">
+						  <div class="col-12">
+							<table class="table table-bordered">
+							  <thead>
+								<tr>
+								  <th scope="col">ID</th>
+								  <th scope="col">Име на госта</th>
+								  <th scope="col">Фамилия</th>
+								  <th scope="col">Вегетарианец</th>
+								  
+								</tr>
+							  </thead>
+							  <tbody>
+			
+								{% for guest in ilian_guests %}
+									{% if guest.accept_invitation == 'Приемам'  %}
+										<tr style="background-color:rgb(203, 240, 148);">
+										  <th scope="row">{{ guest.pk }}</th>
+										  <td>{{ guest.first_name }}</td>
+										  <td>{{ guest.last_name }}</td>
+										  <td>{{ guest.is_vegetarian }}</td>
+										</tr>
+									{% elif guest.accept_invitation == 'Отказвам' %}
+									<tr style="background-color:rgb(240, 161, 161);">
+										<th scope="row">{{ guest.pk }}</th>
+										<td>{{ guest.first_name }}</td>
+										<td>{{ guest.last_name }}</td>
+										<td>{{ guest.is_vegetarian }}</td>
+									  </tr>
+									{% else %}
+									<tr style="background-color:rgb(248, 248, 138);">
+										<th scope="row">{{ guest.pk }}</th>
+										<td>{{ guest.first_name }}</td>
+										<td>{{ guest.last_name }}</td>
+										<td>{{ guest.is_vegetarian }}</td>
+									  </tr>
+									{% endif %}
+								   
+									
+								
+								
+								{% endfor %}
+							
+							  </tbody>
+							</table>
+						  </div>
+						</div>
+  
+					</div>
+				  </div>
+			
+
             </div>
+
+			<div class="container">
+									<!-- Button trigger modal -->
+									<a type="button" class="btn btn-success" href="{% url 'all_accept' %}">Success</a>
+			</div>
+
+
 
 
           </div>
 
 		
+
+
+
+
+
 		<footer id="footer" class="footer" style="background-color: cadetblue;">
 			<div class="container">
 				<div class="row">

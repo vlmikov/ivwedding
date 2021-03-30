@@ -1,0 +1,543 @@
+{% load static %}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+
+<head>
+	<!-- meta charec set -->
+	<meta charset="utf-8">
+	<!-- Always force latest IE rendering engine or request Chrome Frame -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<!-- Page Title -->
+	<title>Themefisher.Free Bootstrap3 based HTML5 Templates</title>
+	<!-- Meta Description -->
+	<meta name="description" content="Blue One Page Creative HTML5 Template">
+	<meta name="keywords"
+		content="one page, single page, onepage, responsive, parallax, creative, business, html5, css3, css3 animation">
+	<meta name="author" content="Muhammad Morshed">
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Google Font -->
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+	<!-- CSS
+		================================================== -->
+	<link rel="stylesheet" href="{% static 'wedd_app/css/timeline.css' %}">
+	<!-- Fontawesome Icon font -->
+	<link rel="stylesheet" href="{% static 'wedd_app/css/font-awesome.min.css' %}">
+	<!-- Twitter Bootstrap css -->
+	<link rel="stylesheet" href="{% static 'wedd_app/css/bootstrap.min.css' %}">
+	<!-- jquery.fancybox  -->
+	<link rel="stylesheet" href="{% static 'wedd_app/css/jquery.fancybox.css' %}">
+	<!-- animate -->
+	<link rel="stylesheet" href="{% static 'wedd_app/css/animate.css' %}">
+	<!-- Main Stylesheet -->
+	<link rel="stylesheet" href="{% static 'wedd_app/css/main.css' %}">
+	<!-- media-queries -->
+	<link rel="stylesheet" href="{% static 'wedd_app/css/media-queries.css' %}">
+
+
+	<link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
+
+	<!-- Modernizer Script for old Browsers -->
+	<script src="{% static 'wedd_app/js/modernizr-2.6.2.min.js' %}"></script>
+
+
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+
+
+	<!--FONT-->
+	<link href='http://fonts.googleapis.com/css?family=Oleo+Script' rel='stylesheet' type='text/css'>
+
+
+
+
+
+
+	<!--@import url('https://fonts.googleapis.com/css?family=Meie+Script|Shadows+Into+Light|Arvo|Monda');
+
+.row {
+  font-size: 18pt;
+  font-weight: 600;
+}
+
+.font_meie_script {
+  font-family: 'Pacifico', cursive;
+}
+-->
+
+
+
+
+	<style>
+		p {
+			font: 400 18px/1.3 'Stick', 'Oleo Script', Helvetica, sans-serif;
+			color: black;
+
+		}
+
+
+		body {
+			background-image: url("{% static 'wedd_app/img/background_test_1.jpg' %}");
+			font-family: 'Marck Script', cursive;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+
+			background-size: cover;
+		}
+
+		footer {
+			background-color: white;
+		}
+
+		.collapsible {
+			background-color: white;
+			color: black;
+			cursor: pointer;
+			padding: 18px;
+			width: 100%;
+			border: none;
+			text-align: center;
+			outline: none;
+			font-size: 25px;
+			border-radius: 12px;
+		}
+
+		.active,
+		.collapsible:hover {
+			background-color: turquoise;
+		}
+
+		.content {
+			padding: 0 18px;
+			display: none;
+			overflow: hidden;
+			background-color: #f1f1f1;
+		}
+	</style>
+
+
+
+</head>
+
+
+
+{% if accept_all %}
+<body id="body" style="background-image: url('{% static 'wedd_app/img/background_test_1.jpg' %}');">
+{% else %}
+<body id="body" style="background-image: url('{% static 'wedd_app/img/invitation.jpg' %}');">
+{% endif %}
+	<!--MUSIC
+<audio src="{% static 'wedd_app/music/background.mp3' %}" id="my_audio" loop="loop"></audio>
+
+<script type="text/javascript">
+	setTimeout(function(){
+		//This area will be used to write code
+		document.getElementById("my_audio").play();
+		var audio = document.getElementById("my_audio");
+		audio.volume = 0.2;
+
+	}, 3000)
+
+</script>
+		-->
+
+
+
+
+	<!-- preloader -->
+	<div id="preloader">
+		<img src="{% static 'wedd_app/img/preloader.gif' %}" style="width: 50px;" alt="Preloader">
+	</div>
+	<!-- end preloader -->
+
+	<!-- 
+        Fixed Navigation
+        ==================================== -->
+	<header id="navigation" class="transperant navbar-fixed-top navbar">
+		<div class="container">
+			<div class="navbar-header">
+				<!-- responsive nav button -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<i class="fa fa-bars fa-2x"></i>
+				</button>
+				<!-- /responsive nav button -->
+
+				<!-- logo -->
+				<a class="navbar-brand" href="#body">
+					<h1 id="logo">
+						<img height="100px" src="{% static 'wedd_app/img/logo.png' %}" alt="Brandi">
+					</h1>
+				</a>
+				<!-- /logo -->
+
+
+
+
+
+
+			</div>
+
+			<!-- main nav -->
+			<nav class="collapse navbar-collapse navbar-right" role="navigation">
+				<ul id="nav" class="nav navbar-nav">
+					
+
+				</ul>
+			</nav>
+			<!-- /main nav -->
+
+
+
+
+		</div>
+
+
+
+	</header>
+	<!--
+        End Fixed Navigation
+        ==================================== -->
+
+
+
+	<!--
+        Home Slider
+        ==================================== -->
+
+	<section id="slider" style="padding-top: 70px; height: auto;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<img src="{% static 'wedd_app/img/wallpaper-3.png' %}" alt="Team Member" class="img-responsive"
+						id="img-1" style="width: 100%; linear-gradient(to right, rgba(255,255,255,0) 20%,
+					rgba(255,255,255,1))">
+				</div>
+				<div class="col-md-4 font_meie_script" style="margin-top:5%; line-height: 1.6;">
+					<img src="{% static 'wedd_app/img/logo-1-removebg-preview.png' %}" alt="Team Member"
+						class="img-responsive" id="img-1" style="width: 100%; linear-gradient(to right, rgba(255,255,255,0) 20%,
+					rgba(255,255,255,1))">
+					<hr>
+					<p style=" font-family: 'Lobster', cursive;" id="text-1"></p>
+
+
+
+				</div>
+			</div>
+			
+		</div>
+	</section>
+
+    <div class="container">
+        <form action="#" method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            <p>{{ form.greeting_message_1 }}</p>
+           
+            <input type="submit" title="Изпрати" >
+        </form>
+
+    </div>
+
+	<!--
+        End Home SliderEnd
+        ==================================== -->
+
+
+	<!--
+        Features
+        ==================================== -->
+
+	<!--
+
+
+		<section id="features" class="features">
+			<div class="container">
+				<div class="row" style="background: transparent;">
+
+
+				
+
+
+
+				
+					<div class="sec-title text-center mb50 wow bounceInDown animated" data-wow-duration="500ms">
+						<h2 style="color: red;">За нас</h2>
+						<div class="devider"><i class="fa fa-heart-o fa-lg" style="color: plum;"></i></div>
+					</div>
+
+					
+					<div class="col-md-4 wow fadeInLeft" data-wow-duration="500ms">
+						<div class="service-item">
+							<div class="service-icon">
+								<i class="fa fa-github fa-2x"></i>
+							</div>
+							
+							<div class="service-desc">
+								<h3>Първа среща</h3>
+								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore</p>
+							</div>
+						</div>
+					</div>
+					
+					
+			
+					<div class="col-md-4 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="500ms">
+						<div class="service-item">
+							<div class="service-icon">
+								<i class="fa fa-pencil fa-2x"></i>
+							</div>
+							
+							<div class="service-desc">
+								<h3>Пътувания</h3>
+								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore</p>
+							</div>
+						</div>
+					</div>
+					
+					
+				
+					<div class="col-md-4 wow fadeInRight" data-wow-duration="500ms"  data-wow-delay="900ms">
+						<div class="service-item">
+							<div class="service-icon">
+								<i class="fa fa-bullhorn fa-2x"></i>
+							</div>
+							
+							<div class="service-desc">
+								<h3>Незабравими моменти</h3>
+								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore</p>
+							</div>
+						</div>
+					</div>
+					
+						
+				</div>
+			</div>
+		</section>
+		-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--
+        Meet Our Team
+        ==================================== -->
+
+	
+
+
+
+
+	<script>
+		document.getElementById("+1")
+			.addEventListener("click", function () {
+				if (document.getElementById("add_new").hidden == true) {
+					document.getElementById("add_new").hidden = false;
+				}
+				else {
+					document.getElementById("add_new").hidden = true;
+				}
+
+				document.getElementById("awesome").hidden = false;
+			}, false);
+
+	</script>
+
+
+	<!--
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$(".btnm .fa-play-circle-o").on('click', function(){
+					$(this).hide();
+					$(".fa-pause-circle-o").fadeIn();
+					$("#myMusic")[0].play();
+				});
+
+				$(".btnm .fa-pause-circle-o").on('click', function(){
+					$(this).hide();
+					$(".fa-play-circle-o").fadeIn();
+					$("#myMusic")[0].play();
+				});
+
+				 });
+		</script>
+
+		-->
+
+	<a href="javascript:void(0);" id="back-top"><i class="fa fa-angle-up fa-3x"></i></a>
+
+	<!-- Essential jQuery Plugins
+		================================================== -->
+	<!-- Main jQuery -->
+	<script src="{% static 'wedd_app/js/jquery-1.11.1.min.js' %}"></script>
+	<!-- Single Page Nav -->
+	<script src="{% static 'wedd_app/js/jquery.singlePageNav.min.js' %}"></script>
+	<!-- Twitter Bootstrap -->
+	<script src="{% static 'wedd_app/js/bootstrap.min.js' %}"></script>
+	<!-- jquery.fancybox.pack -->
+	<script src="{% static 'wedd_app/js/jquery.fancybox.pack.js' %}"></script>
+	<!-- jquery.mixitup.min -->
+	<script src="{% static 'wedd_app/js/jquery.mixitup.min.js' %}"></script>
+	<!-- jquery.parallax -->
+	<script src="{% static 'wedd_app/js/jquery.parallax-1.1.3.js' %}"></script>
+	<!-- jquery.countTo -->
+	<script src="{% static 'wedd_app/js/jquery-countTo.js' %}"></script>
+	<!-- jquery.appear -->
+	<script src="{% static 'wedd_app/js/jquery.appear.js' %}"></script>
+	<!-- Contact form validation -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
+	<!-- Google Map -->
+	<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"></script>
+	<!-- jquery easing -->
+	<script src="{% static 'wedd_app/js/jquery.easing.min.js' %}"></script>
+	<!-- jquery easing -->
+	<script src="{% static 'wedd_app/js/wow.min.js' %}"></script>
+	<script>
+		var wow = new WOW({
+			boxClass: 'wow',      // animated element css class (default is wow)
+			animateClass: 'animated', // animation css class (default is animated)
+			offset: 120,          // distance to the element when triggering the animation (default is 0)
+			mobile: false,       // trigger animations on mobile devices (default is true)
+			live: true        // act on asynchronously loaded content (default is true)
+		}
+		);
+		wow.init();
+	</script>
+	<!-- Custom Functions -->
+	<script src="{% static 'wedd_app/js/custom.js'%}"></script>
+
+	<!--BOOTSTRAP-->
+	<script>
+		var coll = document.getElementsByClassName("collapsible");
+		var i;
+
+		for (i = 0; i < coll.length; i++) {
+			coll[i].addEventListener("click", function () {
+				this.classList.toggle("active");
+				var content = this.nextElementSibling;
+				if (content.style.display === "block") {
+					content.style.display = "none";
+				} else {
+					content.style.display = "block";
+				}
+			});
+		}
+	</script>
+
+
+
+
+
+	<script>
+        var reqData = new Boolean({{accept_all}})
+
+        console.log(reqData)
+		var i = 0;
+		if(!reqData){
+            var txt = "Радвам се , че ще усееш";
+        } else {
+            var txt = "Много съжаляваме, че нмя ада успееш да се присъединиш към нас";
+        }
+        
+        
+		var speed = 80;
+
+		function typeWriter() {
+			if (i < txt.length) {
+				document.getElementById(id = "text-1").innerHTML += txt.charAt(i);
+				i++;
+				setTimeout(typeWriter, speed);
+			}
+		}
+
+		typeWriter()
+
+	</script>
+
+
+
+	<script type="text/javascript">
+		$(function () {
+			/* ========================================================================= */
+			/*	Contact Form
+			/* ========================================================================= */
+
+			$('#contact-form').validate({
+				rules: {
+					name: {
+						required: true,
+						minlength: 2
+					},
+					email: {
+						required: true,
+						email: true
+					},
+					message: {
+						required: true
+					}
+				},
+				messages: {
+					name: {
+						required: "come on, you have a name don't you?",
+						minlength: "your name must consist of at least 2 characters"
+					},
+					email: {
+						required: "no email, no message"
+					},
+					message: {
+						required: "um...yea, you have to write something to send this form.",
+						minlength: "thats all? really?"
+					}
+				},
+				submitHandler: function (form) {
+					$(form).ajaxSubmit({
+						type: "POST",
+						data: $(form).serialize(),
+						url: "process.php",
+						success: function () {
+							$('#contact-form :input').attr('disabled', 'disabled');
+							$('#contact-form').fadeTo("slow", 0.15, function () {
+								$(this).find(':input').attr('disabled', 'disabled');
+								$(this).find('label').css('cursor', 'default');
+								$('#success').fadeIn();
+							});
+						},
+						error: function () {
+							$('#contact-form').fadeTo("slow", 0.15, function () {
+								$('#error').fadeIn();
+							});
+						}
+					});
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>
